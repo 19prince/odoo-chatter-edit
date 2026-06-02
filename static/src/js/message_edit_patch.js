@@ -19,6 +19,6 @@ patch(Message.prototype, {
         if (this.thread?.model === "discuss.channel") {
             return super.allowsEdition;
         }
-        return this.store.self.isInternalUser ?? super.allowsEdition;
+        return this.store.self?.type === "partner" || super.allowsEdition;
     },
 });
