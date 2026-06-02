@@ -15,10 +15,10 @@ if (editAction) {
 // Allow any internal user to edit comment-type messages on non-channel threads.
 // discuss.channel threads keep original author-only behavior.
 patch(Message.prototype, {
-    get allowsEdition() {
+    get editable() {
         if (this.thread?.model === "discuss.channel") {
-            return super.allowsEdition;
+            return super.editable;
         }
-        return this.store.self?.type === "partner" || super.allowsEdition;
+        return this.store.self?.type === "partner" || super.editable;
     },
 });
