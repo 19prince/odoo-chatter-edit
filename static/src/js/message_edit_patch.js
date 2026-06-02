@@ -14,11 +14,18 @@ if (editAction) {
 
 // Allow any internal user to edit comment-type messages on non-channel threads.
 // discuss.channel threads keep original author-only behavior.
+// editable controls whether the pencil icon shows; allowsEdition gates the onClick handler.
 patch(Message.prototype, {
     get editable() {
         if (this.thread?.model === "discuss.channel") {
             return super.editable;
         }
         return this.store.self?.type === "partner" || super.editable;
+    },
+    get allowsEdition() {
+        if (this.thread?.model === "discuss.channel") {
+            return super.allowsEdition;
+        }
+        return this.store.self?.type === "partner" || super.allowsEdition;
     },
 });
