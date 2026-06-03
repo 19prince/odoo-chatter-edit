@@ -9,7 +9,6 @@
     'depends': ['mail'],
     'assets': {
         'web.assets_backend': [
-            'mail_message_edit/static/src/xml/message_edit_patch.xml',
             'mail_message_edit/static/src/js/message_edit_patch.js',
         ],
     },
