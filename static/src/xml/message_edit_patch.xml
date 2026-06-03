@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <!--
+        Extend the Composer condition in mail.Message to show when message.composer is set
+        directly (fallback for when messageEdition prop is absent in chatter context).
+        The standard condition checks messageEdition.editingMessage; our fallback sets
+        message.composer directly in the onClick override, so we add that as an alternative.
+    -->
+    <t t-inherit="mail.Message" t-inherit-mode="extension">
+        <xpath expr="//Composer[@autofocus='true']" position="attributes">
+            <attribute name="t-elif">props.message.eq(props.messageEdition?.editingMessage) or message.composer</attribute>
+        </xpath>
+    </t>
+</templates>
