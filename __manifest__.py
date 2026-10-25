@@ -1,6 +1,6 @@
 {
     'name': 'Chatter Message Edit',
-    'version': '18.0.1.0.0',
+    'version': '18.0.1.0.1',
     'category': 'Discuss',
     'summary': 'Allows all internal users to edit chatter messages',
     'author': '19 Prince',

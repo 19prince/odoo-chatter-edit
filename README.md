@@ -36,9 +36,9 @@ Or via CLI:
 
 ## How It Works
 
-### Backend (`models/mail_message.py`)
+### Backend (`controllers/main.py`)
 
-Overrides `_compute_is_current_user_or_guest_author` on `mail.message`. Any internal user gets `is_current_user_or_guest_author = True` for comment-type messages, which is the field checked by the `/mail/message/update_content` HTTP controller.
+Extends `ThreadController._is_message_editable`, the check behind `/mail/message/update_content`. Internal users may edit messages on document threads they can post on; Discuss channel messages stay author-only. `is_current_user_or_guest_author` is left untouched, so attachment, link-preview and channel features still see the real author.
 
 ### Frontend (`static/src/js/message_edit_patch.js`)
 
