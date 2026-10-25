@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <!--
+        In saas-18.2 the Composer only renders when props.messageEdition.editingMessage
+        equals this message. When messageEdition is absent from props (chatter context),
+        we fall back to setting message.composer directly in the JS onClick override.
+        This patch extends the condition so the Composer also shows when message.composer
+        is set, making both code paths work.
+
+        XPath targets //Composer[@composer='message.composer'] which is unique to this
+        element inside mail.Message. We deliberately avoid //Composer[@autofocus='true']
+        because that also matches the standalone Composer in mail.Chatter, which would
+        receive an invalid t-elif (no preceding t-if) and crash OWL compilation.
+    -->
+    <t t-inherit="mail.Message" t-inherit-mode="extension">
+        <xpath expr="//Composer[@composer='message.composer']" position="attributes">
+            <attribute name="t-elif">props.message.eq(props.messageEdition?.editingMessage) or message.composer</attribute>
+        </xpath>
+    </t>
+</templates>
